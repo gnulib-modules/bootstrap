@@ -25,7 +25,7 @@ accreted incumbent script still resides (albeit carrying fixes to many of
 the outright bugs and misfeatures fixed by this version).  However, I've
 found this version considerably more reliable, and infinitely more
 malleable when it comes to extending the existing functionality for the
-unusal requirements of other projects that the Gnulib `bootstrap` cannot
+unusual requirements of other projects that the Gnulib `bootstrap` cannot
 handle.  It is very widely deployed, and extremely well tested in all of
 my own projects, and many others besides.
 
