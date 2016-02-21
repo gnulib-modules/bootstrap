@@ -3,7 +3,7 @@
 
 The process of executing the various tools required to bring all the
 generated files up to date in a directory freshly checked out from
-source control can be quite involved.  Many GNU projects use
+source control can be quite involved.  Many GNU projects use a
 @command{bootstrap} script to execute some or all of the following in the
 correct order: @command{gnulib-tool}, @command{autopoint},
 @command{libtoolize}, @command{autoreconf}. Often there's also
@@ -18,6 +18,14 @@ GNU project maintainers. However, the bootstrapping needs of these
 projects vary enormously, so Gnulib's @command{bootstrap} needs to be
 extremely @strong{customisable} and extensible, with less effort than
 would be otherwise required to invent an ad-hoc solution.
+Unfortunately, Gnulib's @command{bootstrap} is not at all extensible,
+and makes it very hard to customize for any additional book-keeping or
+other tasks required at bootstrap-time.  This version of
+@command{bootstrap} does not have any of those short-comings -- in
+addition to the basic bootstrapping facilities provided by Gnulib's
+implementation, this version can be changed and upgraded on the fly by
+overridding or appending to existing functions in @file{bootstrap.conf}.
+
 
 @menu
 * Customisation::
