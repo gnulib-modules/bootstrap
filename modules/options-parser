@@ -14,7 +14,7 @@ Makefile.am:
 Include:
 
 License:
-GPLed build tool
+Dual MIT/GPLv2+
 
 Maintainer:
 Gary V. Vaughan <gary@gnu.org>
