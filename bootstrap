@@ -1,11 +1,11 @@
 #! /bin/sh
 ## DO NOT EDIT - This file generated from build-aux/bootstrap.in
-##               by inline-source v2014-01-03.01
+##               by inline-source v2016-02-21.11
 
 # Bootstrap an Autotooled package from checked-out sources.
 # Written by Gary V. Vaughan, 2010
 
-# Copyright (C) 2010-2015 Free Software Foundation, Inc.
+# Copyright (C) 2010-2016 Free Software Foundation, Inc.
 # This is free software; see the source for copying conditions.  There is NO
 # warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -230,12 +230,12 @@ vc_ignore=
 
 # Source required external libraries:
 # Set a version string for this script.
-scriptversion=2015-01-20.17; # UTC
+scriptversion=2016-02-21.11; # UTC
 
 # General shell script boiler plate, and helper functions.
 # Written by Gary V. Vaughan, 2004
 
-# Copyright (C) 2004-2015 Free Software Foundation, Inc.
+# Copyright (C) 2004-2016 Free Software Foundation, Inc.
 # This is free software; see the source for copying conditions.  There is NO
 # warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -1536,12 +1536,12 @@ func_lt_ver ()
 #! /bin/sh
 
 # Set a version string for this script.
-scriptversion=2014-01-07.03; # UTC
+scriptversion=2016-02-21.11; # UTC
 
 # A portable, pluggable option parser for Bourne shell.
 # Written by Gary V. Vaughan, 2010
 
-# Copyright (C) 2010-2015 Free Software Foundation, Inc.
+# Copyright (C) 2010-2016 Free Software Foundation, Inc.
 # This is free software; see the source for copying conditions.  There is NO
 # warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -2146,7 +2146,7 @@ func_version ()
 # Extract macro arguments from autotools input with GNU M4.
 # Written by Gary V. Vaughan, 2010
 #
-# Copyright (C) 2010-2015 Free Software Foundation, Inc.
+# Copyright (C) 2010-2016 Free Software Foundation, Inc.
 # This is free software; see the source for copying conditions.  There is NO
 # warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -2155,7 +2155,7 @@ test -z "$progpath" && . `echo "$0" |${SED-sed} 's|[^/]*$||'`/funclib.sh
 test extract-trace = "$progname" && . `echo "$0" |${SED-sed} 's|[^/]*$||'`/options-parser
 
 # Set a version string.
-scriptversion=2015-01-20.17; # UTC
+scriptversion=2016-02-21.11; # UTC
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -2621,7 +2621,7 @@ test extract-trace = "$progname" && func_main "$@"
 # End:
 
 # Set a version string for *this* script.
-scriptversion=2015-01-20.17; # UTC
+scriptversion=2016-02-21.11; # UTC
 
 
 ## ------------------- ##

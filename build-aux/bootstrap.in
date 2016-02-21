@@ -3,7 +3,7 @@
 # Bootstrap an Autotooled package from checked-out sources.
 # Written by Gary V. Vaughan, 2010
 
-# Copyright (C) 2010-2015 Free Software Foundation, Inc.
+# Copyright (C) 2010-2016 Free Software Foundation, Inc.
 # This is free software; see the source for copying conditions.  There is NO
 # warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
@@ -232,7 +232,7 @@ vc_ignore=
 . `echo "$0" |${SED-sed} 's|[^/]*$||'`"extract-trace"
 
 # Set a version string for *this* script.
-scriptversion=2015-01-20.17; # UTC
+scriptversion=2016-02-21.11; # UTC
 
 
 ## ------------------- ##
