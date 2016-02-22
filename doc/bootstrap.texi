@@ -87,7 +87,7 @@ declared with @code{AM_INIT_AUTOMAKE}, Libtool version with
 
 If @code{AB_INIT} is declared in @file{configure.ac}, then a versionless
 requirement for Autobuild is added automatically, and finally if there
-are any diff files under @code{local_gl_dir}, then a versionless
+are any diff files under @code{local_gl_path}, then a versionless
 requirement for patch is also added.
 
 When @command{bootstrap} is invoked, it will check that all the listed
@@ -157,13 +157,13 @@ it here if you prefer.
 @cnindex doc_base
 @cnindex gnulib_mk
 @cnindex gnulib_name
-@cnindex local_gl_dir
+@cnindex local_gl_path
 @cnindex source_base
 @cnindex tests_base
 @item doc_base
 @itemx gnulib_mk
 @itemx gnulib_name
-@itemx local_gl_dir
+@itemx local_gl_path
 @itemx source_base
 @itemx tests_base
 These are normally extracted from @file{gnulib-cache.m4}, regardless of

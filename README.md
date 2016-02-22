@@ -43,7 +43,7 @@ There are two ways to incorporate this bootstrap into your own projects:
 
 1. If your project already uses [GNU Gnulib], then you can add this
    entire repository as a submodule in the `gl` directory, and use that
-   as an override directory by setting `local_gl_dir=gl`, and adding
+   as an override directory by setting `local_gl_path=gl`, and adding
    `bootstrap` to `gnulib_modules` in your project's `bootstrap.conf`.
 
    Initialise your actual bootstrap script from the subproject with:

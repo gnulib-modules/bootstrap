@@ -132,7 +132,7 @@ package_bugreport=
 doc_base=
 gnulib_mk=
 gnulib_name=
-local_gl_dir=
+local_gl_path=
 source_base=
 tests_base=
 
@@ -2796,7 +2796,7 @@ test extract-trace = "$progname" && func_main "$@"
 # End:
 
 # Set a version string for *this* script.
-scriptversion=2016-02-22.13; # UTC
+scriptversion=2016-02-22.23; # UTC
 
 
 ## ------------------- ##
@@ -3160,7 +3160,7 @@ func_libtoolize ()
 # -----------------------------------
 # Copy SRC, a path relative to the gnulib sub-tree, to DEST, a path
 # relative to the top-level source directory using gnulib-tool so that
-# any patches or replacements in $local_gl_dir are applied.
+# any patches or replacements in $local_gl_path are applied.
 func_gnulib_tool_copy_file ()
 {
     $debug_cmd
@@ -3788,13 +3788,13 @@ func_require_buildreq_automake ()
 # require_buildreq_patch
 # ----------------------
 # Automatically add a patch build-requirement if there are diff files
-# in $local_gl_dir.
+# in $local_gl_path.
 require_buildreq_patch=func_require_buildreq_patch
 func_require_buildreq_patch ()
 {
     $debug_cmd
 
-    $require_local_gl_dir
+    $require_local_gl_path
 
     # This ensures PATCH is set appropriately by the time
     # func_check_versions enforces $buildreq.
@@ -3802,14 +3802,19 @@ func_require_buildreq_patch ()
 
     # If patch is not already listed in $buildreq...
     printf '%s\n' "$buildreq" |func_grep_q '^[	 ]*patch' || {
-      # The ugly find invocation is necessary to exit with non-zero
-      # status for old find binaries that don't support -exec fully.
-      if test ! -d "$local_gl_dir" \
-          || find "$local_gl_dir" -name "*.diff" -exec false {} \; ; then :
-      else
-          func_append buildreq 'patch - http://www.gnu.org/s/patch
-'
-      fi
+      eval "set dummy $local_gl_path_quoted" ; shift
+
+      for _G_dir
+      do
+        # The ugly find invocation is necessary to exit with non-zero
+        # status for old find binaries that don't support -exec fully.
+        if test ! -d "$_G_dir" \
+            || find "$_G_dir" -name "*.diff" -exec false {} \; ; then :
+        else
+          func_append buildreq "patch - http://www.gnu.org/s/patch$nl"
+          break
+        fi
+      done
     }
 
     require_buildreq_patch=:
@@ -4243,9 +4248,14 @@ func_require_gnulib_tool_base_options ()
       $require_gnulib_name
       test -n "$gnulib_name" \
           && func_append_uniq gnulib_tool_base_options " --lib=$gnulib_name"
-      $require_local_gl_dir
-      test -n "$local_gl_dir" \
-          && func_append_uniq gnulib_tool_base_options " --local-dir=$local_gl_dir"
+      $require_local_gl_path
+      test -n "$local_gl_path" && {
+        eval "set dummy $local_gl_path_quoted" ; shift
+        for _G_dir
+        do
+          func_append_uniq gnulib_tool_base_options " --local-dir=$_G_dir"
+        done
+      }
       $require_source_base
       test -n "$source_base" \
           && func_append_uniq gnulib_tool_base_options " --source-base=$source_base"
@@ -4292,25 +4302,49 @@ Please install GNU Libtool, or 'export LIBTOOLIZE=/path/to/libtoolize'."
 }
 
 
-# require_local_gl_dir
-# --------------------
-# Ensure local_gl_dir has a sensible value, extracted from 'gnulib-cache.m4'
-# if possible, otherwise letting 'gnulib-tool' pick a default.
-require_local_gl_dir=func_require_local_gl_dir
-func_require_local_gl_dir ()
+# require_local_gl_path
+# ---------------------
+# Ensure local_gl_path has a sensible value, extracted from 'gnulib-cache.m4' if
+# possible, otherwise letting 'gnulib-tool' pick a default.
+require_local_gl_path=func_require_local_gl_path
+func_require_local_gl_path ()
 {
     $debug_cmd
 
     $require_gnulib_cache
 
-    test -f "$gnulib_cache" && test -z "$local_gl_dir" && {
-      func_extract_trace_first "gl_LOCAL_DIR" "$gnulib_cache"
-      local_gl_dir=$func_extract_trace_first_result
-
-      test -n "$local_gl_dir" && func_verbose "local_gl_dir='$local_gl_dir'"
+    # Compat with older bootstrap versions.
+    test -n "$local_gl_dir" && {
+      func_warning settings "\
+Please use 'local_gl_path' instead of 'local_gl_dir' in your
+'bootstrap.conf' file."
+      local_gl_path=$local_gl_dir
+      local_gl_dir=
     }
 
-    require_local_gl_dir=:
+    test -f "$gnulib_cache" && test -z "$local_gl_path" && {
+      func_extract_trace_first "gl_LOCAL_DIR" "$gnulib_cache"
+      local_gl_path=$func_extract_trace_first_result
+      test -n "$local_gl_path" && func_verbose "local_gl_path='$local_gl_path'"
+    }
+
+    test -z "$local_gl_path_quoted" && test -n "$local_gl_path" && {
+      save_IFS=$IFS
+      set dummy
+      # Don't use PATH_SEPARATOR here, gnulib must be fixed to store only ':' as
+      # path separator into gnulib-cache.m4 (consistency reasons among systems).
+      IFS=:
+      for _G_dir in $local_gl_path
+      do
+        set "$@" "$_G_dir"
+      done
+      shift
+      IFS=$save_IFS
+      func_quote eval "$@"
+      local_gl_path_quoted=$func_quote_result
+    }
+
+    require_local_gl_path=:
 }
 
 
