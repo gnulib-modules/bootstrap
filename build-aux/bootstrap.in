@@ -341,6 +341,23 @@ func_update_translations ()
 }
 
 
+# func_gnulib_git_submodules
+# --------------------------
+# Initialize all git modules from $gnulib_git_submodules before we
+# run 'gnulib-tool'.
+func_gnulib_git_submodules ()
+{
+    test -z "$gnulib_git_submodules" && return
+
+    for _G_submodule in $gnulib_git_submodules
+    do
+      func_show_eval "git submodule init -- $_G_submodule" \
+          && func_show_eval "git submodule update -- $_G_submodule" \
+          || func_fatal_error "Unable to init git module '$_G_submodule'."
+    done
+}
+
+
 # func_reconfigure
 # ----------------
 # Reconfigure the current package by running the appropriate autotools in a
@@ -382,6 +399,9 @@ func_reconfigure ()
     # warnings if the initial 'aclocal' is confused by the libtoolized
     # (or worse: out-of-date) macro directory.
     func_libtoolize
+
+    # Before we run 'gnulib-tool', we need to have the --local-dir's prepared.
+    func_gnulib_git_submodules
 
     # If you need to do anything after 'gnulib-tool' is done, but before
     # 'autoreconf' runs, you don't need to override this whole function,
