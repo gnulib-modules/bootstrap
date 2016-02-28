@@ -1,5 +1,5 @@
 # Set a version string for this script.
-scriptversion=2016-02-22.13; # UTC
+scriptversion=2016-02-28.16; # UTC
 
 # General shell script boiler plate, and helper functions.
 # Written by Gary V. Vaughan, 2004
@@ -66,9 +66,6 @@ do
 	fi"
 done
 
-# CDPATH.
-(unset CDPATH) >/dev/null 2>&1 && unset CDPATH
-
 # Make sure IFS has a sensible default
 sp=' '
 nl='
@@ -84,6 +81,26 @@ if test "${PATH_SEPARATOR+set}" != set; then
   }
 fi
 
+
+# func_unset VAR
+# --------------
+# Portably unset VAR.
+# In some shells, an 'unset VAR' statement leaves a non-zero return
+# status if VAR is already unset, which might be problematic if the
+# statement is used at the end of a function (thus poisoning its return
+# value) or when 'set -e' is active (causing even a spurious abort of
+# the script in this case).
+func_unset ()
+{
+    { eval $1=; (eval unset $1) >/dev/null 2>&1 && eval unset $1 || : ; }
+}
+
+
+# Make sure CDPATH doesn't cause `cd` commands to output the target dir.
+func_unset CDPATH
+
+# Make sure ${,E,F}GREP behave sanely.
+func_unset GREP_OPTIONS
 
 
 ## ------------------------- ##
