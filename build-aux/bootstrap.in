@@ -415,6 +415,8 @@ func_gnulib_tool ()
     $require_libtoolize
 
     test true = "$gnulib_tool" || {
+      $require_gnulib_git_submodules
+
       # bootstrap.conf written for gnulib bootstrap expects
       # gnulib_tool_option_extras to which --no-changelog is appended,
       # but libtool bootstrap expects you to append to gnulib_tool_options
@@ -913,6 +915,26 @@ func_update_dotversion ()
 # used in preference to deriving the default. Call them using their
 # associated 'require_*' variable to ensure that they are executed, at
 # most, once.
+
+
+# require_gnulib_git_submodules
+# -----------------------------
+# Initialize all git modules from $gnulib_git_submodules before we
+# run 'gnulib-tool'.
+require_gnulib_git_submodules=func_require_gnulib_git_submodules
+func_require_gnulib_git_submodules ()
+{
+    test -n "$gnulib_git_submodules" && {
+      for _G_submodule in $gnulib_git_submodules
+      do
+        func_show_eval "git submodule init -- $_G_submodule" \
+            && func_show_eval "git submodule update -- $_G_submodule" \
+            || func_fatal_error "Unable to init git module '$_G_submodule'."
+      done
+    }
+
+    require_gnulib_git_submodules=:
+}
 
 
 # require_checkout_only_file
