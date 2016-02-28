@@ -84,6 +84,8 @@ if test "${PATH_SEPARATOR+set}" != set; then
   }
 fi
 
+# Make sure ${,E,F}GREP behave sanely.
+GREP_OPTIONS=; unset GREP_OPTIONS
 
 
 ## ------------------------- ##
