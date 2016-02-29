@@ -1059,7 +1059,8 @@ func_quote_portable ()
         *[\\\`\"\$]*)
           case $func_quote_portable_result in
             *[\[\*\?]*)
-              func_quote_portable_result=`$ECHO "$func_quote_portable_result" | $SED "$sed_quote_subst"`
+              func_quote_portable_result=`$ECHO "$func_quote_portable_result" \
+                  | $SED "$sed_quote_subst"`
               break
               ;;
           esac
@@ -1146,7 +1147,7 @@ fi
 
 # func_quote_arg MODEs ARG
 # ------------------------
-# Quote one ARG to be evaled later.  MODEs argument may contain zero ore more
+# Quote one ARG to be evaled later.  MODEs argument may contain zero or more
 # specifiers listed below separated by ',' character.  This function returns two
 # values:
 #   i) func_quote_arg_result
@@ -1163,8 +1164,8 @@ fi
 #       - the same as 'eval';  but do not quote variable references
 # 'pretty'
 #       - request aesthetic output, i.e. '"a b"' instead of 'a\ b'.  This might
-#         later used in func_quote to get output like: 'echo "a b"' instead of
-#         'echo a\ b'.  This is slower than default on some shells.
+#         be used later in func_quote to get output like: 'echo "a b"' instead
+#         of 'echo a\ b'.  This is slower than default on some shells.
 # 'unquoted'
 #       - produce also $func_quote_arg_unquoted_result which does not contain
 #         wrapping double-quotes.
