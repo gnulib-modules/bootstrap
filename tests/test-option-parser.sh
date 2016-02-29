@@ -54,7 +54,6 @@ check_output ()
 {
     _co_exp_output=$1 ; shift
     _co_exp_retval=$1 ; shift
-    # TODO: check with --debug
     check_output_inner "$_co_exp_output" "$_co_exp_retval" ${1+"$@"}
     check_output_inner "$_co_exp_output" "$_co_exp_retval" --debug ${1+"$@"}
 }

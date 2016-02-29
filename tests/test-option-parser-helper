@@ -20,6 +20,8 @@
 . "$abs_aux_dir"/funclib.sh || exit 1
 . "$abs_aux_dir"/options-parser || exit 1
 
+set -e
+
 scriptversion='test-version'
 
 func_help ()
@@ -33,8 +35,7 @@ func_help ()
 # return value.
 test_prep_do_nothing ()
 {
-    test_prep_do_nothing_result=
-    false
+    :
 }
 func_add_hook func_options_prep test_prep_do_nothing
 
@@ -51,7 +52,6 @@ test_prep_shortcuts ()
         test_prep_shortcuts_result=$func_quote_result
         ;;
       *)
-        false
         ;;
     esac
 }
@@ -79,7 +79,6 @@ test_parse_split_short ()
 
     func_quote eval ${1+"$@"}
     test_parse_split_short_result=$func_quote_result
-    :
 }
 func_add_hook func_parse_options test_parse_split_short
 
@@ -97,7 +96,6 @@ test_parse_subst_equal_signs ()
         test_parse_subst_equal_signs_result=$func_quote_result
         ;;
       *)
-        false
         ;;
     esac
 }
@@ -106,8 +104,7 @@ func_add_hook func_parse_options test_parse_subst_equal_signs
 
 test_parse_do_nothing ()
 {
-    test_parse_do_nothing_result=
-    false
+    :
 }
 func_add_hook func_parse_options test_parse_do_nothing
 
@@ -128,18 +125,17 @@ test_parse_eat_test ()
         ;;
     esac
 
-    $_t_parse_match && {
+    if $_t_parse_match; then
       func_quote eval ${1+"$@"}
       test_parse_eat_test_result=$func_quote_result
-    }
+    fi
 }
 func_add_hook func_parse_options test_parse_eat_test
 
 
 test_validate_do_nothing ()
 {
-    test_validate_do_nothing_result=
-    false
+    :
 }
 func_add_hook func_validate_options test_validate_do_nothing
 
@@ -150,8 +146,6 @@ test_validate_eat_sth ()
       shift
       func_quote eval ${1+"$@"}
       test_validate_eat_sth_result=$func_quote_result
-    else
-      false
     fi
 }
 func_add_hook func_validate_options test_validate_eat_sth
