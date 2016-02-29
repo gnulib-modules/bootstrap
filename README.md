@@ -41,14 +41,35 @@ Usage
 
 There are two ways to incorporate this bootstrap into your own projects:
 
-1. If your project already uses [GNU Gnulib], then you can add this
-   entire repository as a submodule in the `gl` directory, and use that
-   as an override directory by setting `local_gl_path=gl`, and adding
-   `bootstrap` to `gnulib_modules` in your project's `bootstrap.conf`.
+1. If your project already uses [GNU Gnulib], then you can copy this
+   entire repository into your project, let's say under
+   `gl-mod/bootstrap` directory.  If you are using `git` version control
+   system, you are encouraged to add this source repository as a
+   [git submodule][] instead of copying it.
+
+   This configuration options should be added into your project's
+   `bootstrap.conf` file:
+
+   * Specify `local_gl_path=gl-mod/bootstrap` option.  This causes that
+     `gnulib-tool` will be automatically called with
+     `--local-dir gl-mod/bootstrap` option.
+
+   * Add `bootstrap` to `gnulib_modules` option.
+
+   * If your project already uses some other gnulib's local override
+     directories, simply mention those directories in `local_gl_path` too (colon
+     separated list of directories), for example
+     `local_gl_path=gl-local:gl-mod/bootstrap.
+
+   * (Only) if you added this `bootstrap` repository as a git submodule, you
+     want to let it automatically initialized during the first `./bootstrap`
+     invocation.  To achieve this, use `gnulib_git_submodules=gl-mod/bootstrap`
+     option.
 
    Initialise your actual bootstrap script from the subproject with:
 
-      gl/build-aux/inline-source gl/build-aux/bootstrap.in > bootstrap
+      aux_src=gl-mod/bootstrap/build-aux
+      $aux_src/inline-source $aux_src/bootstrap.in > bootstrap
 
    The resulting script will then keep track of changes to the
    subproject and warn you of upstream changes.
@@ -68,3 +89,4 @@ script itself.
 
 
 [gnu gnulib]: http://gnu.org/s/gnulib
+[git submodule]: https://git-scm.com/docs/git-submodule
