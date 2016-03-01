@@ -68,8 +68,10 @@ There are two ways to incorporate this bootstrap into your own projects:
 
    Initialise your actual bootstrap script from the subproject with:
 
+      ```
       aux_src=gl-mod/bootstrap/build-aux
       $aux_src/inline-source $aux_src/bootstrap.in > bootstrap
+      ```
 
    The resulting script will then keep track of changes to the
    subproject and warn you of upstream changes.
