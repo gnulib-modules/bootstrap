@@ -551,8 +551,9 @@ then
 
       func_split_equals_lhs=${1%%=*}
       func_split_equals_rhs=${1#*=}
-      test "x$func_split_equals_lhs" = "x$1" \
-        && func_split_equals_rhs=
+      if test "x$func_split_equals_lhs" = "x$1"; then
+        func_split_equals_rhs=
+      fi
   }'
 else
   # ...otherwise fall back to using expr, which is often a shell builtin.
