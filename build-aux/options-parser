@@ -42,7 +42,7 @@ scriptversion=2016-03-06.01; # UTC
 #
 # In order for the '--version' option to work, you will need to have a
 # suitably formatted comment like the one at the top of this file
-# starting with '# Written by ' and ending with '# warranty; '.
+# starting with '# Written by ' and ending with '# Copyright'.
 #
 # For '-h' and '--help' to work, you will also need a one line
 # description of your script's purpose in a comment directly above the
@@ -54,7 +54,7 @@ scriptversion=2016-03-06.01; # UTC
 # to display verbose messages only when your user has specified
 # '--verbose'.
 #
-# After sourcing this file, you can plug processing for additional
+# After sourcing this file, you can plug in processing for additional
 # options by amending the variables from the 'Configuration' section
 # below, and following the instructions in the 'Option parsing'
 # section further down.
@@ -103,8 +103,8 @@ fatal_help="Try '\$progname --help' for more information."
 ## ------------------------- ##
 
 # This section contains functions for adding, removing, and running hooks
-# to the main code.  A hook is just a named list of of function, that can
-# be run in order later on.
+# in the main code.  A hook is just a list of function names that can be
+# run in order later on.
 
 # func_hookable FUNC_NAME
 # -----------------------
@@ -137,7 +137,8 @@ func_add_hook ()
 
 # func_remove_hook FUNC_NAME HOOK_FUNC
 # ------------------------------------
-# Remove HOOK_FUNC from the list of functions called by FUNC_NAME.
+# Remove HOOK_FUNC from the list of hook functions to be called by
+# FUNC_NAME.
 func_remove_hook ()
 {
     $debug_cmd
@@ -148,8 +149,8 @@ func_remove_hook ()
 
 # func_propagate_result FUNC_NAME_A FUNC_NAME_B
 # ---------------------------------------------
-# If the result of FUNC_NAME_A _is set_, assign the value into *_result
-# variable of FUNC_NAME_B.
+# If the *_result variable of FUNC_NAME_A _is set_, assign its value to
+# *_result variable of FUNC_NAME_B.
 func_propagate_result ()
 {
     func_propagate_result_result=:
@@ -165,7 +166,7 @@ func_propagate_result ()
 # func_run_hooks FUNC_NAME [ARG]...
 # ---------------------------------
 # Run all hook functions registered to FUNC_NAME.
-# It is assumed that the list of hook functions contains nothing more
+# It's assumed that the list of hook functions contains nothing more
 # than a whitespace-delimited list of legal shell function names, and
 # no effort is wasted trying to catch shell meta-characters or preserve
 # whitespace.
@@ -197,15 +198,16 @@ func_run_hooks ()
 ## --------------- ##
 
 # In order to add your own option parsing hooks, you must accept the
-# full positional parameter list in your hook function, you may remove/edit
-# any options that you action, and then pass back the remaining unprocessed
-# options in '<hooked_function_name>_result', escaped suitably for
-# 'eval'.
+# full positional parameter list from your hook function.  You may remove
+# or edit any options that you action, and then pass back the remaining
+# unprocessed options in '<hooked_function_name>_result', escaped
+# suitably for 'eval'.
 #
-# The '<hooked_function_name>_result' variable is automatically unset before
-# your hook gets called; if the performance matters, don't fill the *_result
-# variable unless it is necessary (i.e. do not call the 'func_quote' function if
-# possible as it might be pretty expensive operation on some machines).
+# The '<hooked_function_name>_result' variable is automatically unset
+# before your hook gets called; for best performance, only set the
+# *_result variable when necessary (i.e. don't call the 'func_quote'
+# function unnecessarily because it can be an expensive operation on some
+# machines).
 #
 # Like this:
 #
@@ -217,7 +219,7 @@ func_run_hooks ()
 #        usage_message=$usage_message'
 #      -s, --silent       don'\''t print informational messages
 #    '
-#        # No change in '$@' (ignored completely by this hook).  Let the
+#        # No change in '$@' (ignored completely by this hook).  Leave
 #        # my_options_prep_result variable intact.
 #    }
 #    func_add_hook func_options_prep my_options_prep
@@ -229,7 +231,7 @@ func_run_hooks ()
 #
 #        args_changed=false
 #
-#        # Note that for efficiency, we parse as many options as we can
+#        # Note that, for efficiency, we parse as many options as we can
 #        # recognise in a loop before passing the remainder back to the
 #        # caller on the first unrecognised argument we encounter.
 #        while test $# -gt 0; do
@@ -246,16 +248,14 @@ func_run_hooks ()
 #                         args_changed=:
 #                         ;;
 #            *)           # Make sure the first unrecognised option "$_G_opt"
-#                         # is added back to "$@", we could need that later
+#                         # is added back to "$@" in case we need it later,
 #                         # if $args_changed was set to 'true'.
 #                         set dummy "$_G_opt" ${1+"$@"}; shift; break ;;
 #          esac
 #        done
 #
+#        # Only call 'func_quote' here if we processed at least one argument.
 #        if $args_changed; then
-#          # Optional if-statement optimization to not call 'func_quote'
-#          # here for each argument/hook pair.  Instead call it only if we
-#          # processed at least one argument.
 #          func_quote eval ${1+"$@"}
 #          my_silent_option_result=$func_quote_result
 #        fi
@@ -313,8 +313,9 @@ func_options ()
     done
 
     $_G_options_quoted || {
-      # As we (func_options) are top-level options-parser function and nobody
-      # quoted "$@" for us yet, we need to do it explicitly for caller.
+      # As we (func_options) are top-level options-parser function and
+      # nobody quoted "$@" for us yet, we need to do it explicitly for
+      # caller.
       func_quote eval ${1+"$@"}
       func_options_result=$func_quote_result
     }
@@ -327,8 +328,7 @@ func_options ()
 # Note that when calling hook functions, we pass through the list of
 # positional parameters.  If a hook function modifies that list, and
 # needs to propagate that back to rest of this script, then the complete
-# modified list must be put in 'func_run_hooks_result' before
-# returning $EXIT_SUCCESS (otherwise $EXIT_FAILURE is returned).
+# modified list must be put in 'func_run_hooks_result' before returning.
 func_hookable func_options_prep
 func_options_prep ()
 {
@@ -360,17 +360,17 @@ func_parse_options ()
       func_propagate_result func_run_hooks func_parse_options
       if $func_propagate_result_result; then
         eval set dummy "$func_parse_options_result"; shift
-        # Even though we maybe changed "$@", we passed the "$@" array down into
-        # the hook and it quoted it for us (because we are in this if-branch).
-        # No need to quote it again.
+        # Even though we may have changed "$@", we passed the "$@" array
+        # down into the hook and it quoted it for us (because we are in
+        # this if-branch).  No need to quote it again.
         _G_parse_options_requote=false
       fi
 
       # Break out of the loop if we already parsed every option.
       test $# -gt 0 || break
 
-      # We expect that one of the options parsed in this function matches and
-      # thus we remove the _G_opt it from "$@" and we need to re-quote.
+      # We expect that one of the options parsed in this function matches
+      # and thus we remove _G_opt from "$@" and need to re-quote.
       _G_match_parse_options=:
       _G_opt=$1
       shift
@@ -535,8 +535,8 @@ func_missing_arg ()
 
 # func_split_equals STRING
 # ------------------------
-# Set func_split_equals_lhs and func_split_equals_rhs shell variables after
-# splitting STRING at the '=' sign.
+# Set func_split_equals_lhs and func_split_equals_rhs shell variables
+# after splitting STRING at the '=' sign.
 test -z "$_G_HAVE_XSI_OPS" \
     && (eval 'x=a/b/c;
       test 5aa/bb/cc = "${#x}${x%%/*}${x%/*}${x#*/}${x##*/}"') 2>/dev/null \
