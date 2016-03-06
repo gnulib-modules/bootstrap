@@ -153,6 +153,8 @@ func_remove_hook ()
 # *_result variable of FUNC_NAME_B.
 func_propagate_result ()
 {
+    $debug_cmd
+
     func_propagate_result_result=:
     if eval "test \"\${${1}_result+set}\" = set"
     then
