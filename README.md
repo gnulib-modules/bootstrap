@@ -32,9 +32,13 @@ my own projects, and many others besides.
 Thanks
 ------
 
-My sincere thanks to Bruno Haible, Jim Meyering and Paul Eggert on the
-gnulib developers list for encouragement and input during the design and
-implementation stages.
+My sincere thanks to Pavel Raiskup for considerable help in speeding up
+the hook functions mechanism and the quote for re-evaluation functions
+at the core of these shell scripts.
+
+My sincere thanks also to Bruno Haible, Jim Meyering and Paul Eggert on
+the gnulib developers list for encouragement and input during the design
+and implementation stages.
 
 Usage
 -----
