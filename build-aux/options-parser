@@ -19,7 +19,7 @@
 # <https://github.com/gnulib-modules/bootstrap/issues>
 
 # Set a version string for this script.
-scriptversion=2016-02-21.11; # UTC
+scriptversion=2016-03-06.01; # UTC
 
 
 ## ------ ##
@@ -631,31 +631,44 @@ func_usage_message ()
 # func_version
 # ------------
 # Echo version message to standard output and exit.
+# The version message is extracted from the calling file's header
+# comments, with leading '# ' stripped:
+#   1. First display the progname and version
+#   2. Followed by the header comment line matching  /^# Written by /
+#   3. Then a blank line followed by the first following line matching
+#      /^# Copyright /
+#   4. Immediately followed by any lines between the previous matches,
+#      except lines preceding the intervening completely blank line.
+# For example, see the header comments of this file.
 func_version ()
 {
     $debug_cmd
 
     printf '%s\n' "$progname $scriptversion"
     $SED -n '
-        /(C)/!b go
-        :more
-        /\./!{
-          N
-          s|\n# | |
-          b more
+        /^# Written by /!b
+        s|^# ||; p; n
+
+        :fwd2blank
+        /./ {
+          n
+          b fwd2blank
         }
-        :go
-        /^# Written by /,/# warranty; / {
-          s|^# ||
-          s|^# *$||
-          s|\((C)\)[ 0-9,-]*[ ,-]\([1-9][0-9]* \)|\1 \2|
-          p
+        p; n
+
+        :holdwarranty
+        s|^# ||
+        s|^# *$||
+        /^Copyright /! {
+          /./H
+          n
+          b holdwarranty
         }
-        /^# Written by / {
-          s|^# ||
-          p
-        }
-        /^warranty; /q' < "$progpath"
+
+        s|\((C)\)[ 0-9,-]*[ ,-]\([1-9][0-9]* \)|\1 \2|
+        G
+        s|\(\n\)\n*|\1|g
+        p; q' < "$progpath"
 
     exit $?
 }
