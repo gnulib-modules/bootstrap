@@ -2302,20 +2302,20 @@ func_version ()
         /^# Written by /!b
         s|^# ||; p; n
 
-        :fwd2blank
+        :fwd2blnk
         /./ {
           n
-          b fwd2blank
+          b fwd2blnk
         }
         p; n
 
-        :holdwarranty
+        :holdwrnt
         s|^# ||
         s|^# *$||
-        /^Copyright /! {
+        /^Copyright /!{
           /./H
           n
-          b holdwarranty
+          b holdwrnt
         }
 
         s|\((C)\)[ 0-9,-]*[ ,-]\([1-9][0-9]* \)|\1 \2|
