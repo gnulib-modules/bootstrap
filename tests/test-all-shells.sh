@@ -36,7 +36,7 @@
 
 
 # List of shells we try to check in.
-: ${GL_ALL_SHELLS='ash bash dash ksh zsh busybox'}
+: ${GL_ALL_SHELLS='ash bash dash ksh mksh zsh busybox'}
 
 # List of directories to search for the shell interpreter.
 : ${GL_ALL_SHELLS_DIRS='/bin /sbin'}
