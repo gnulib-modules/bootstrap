@@ -19,11 +19,11 @@
 # <https://github.com/gnulib-modules/bootstrap/issues>
 
 # Make sure we've evaluated scripts we depend on.
-test -z "$progpath" && . `echo "$0" |${SED-sed} 's|[^/]*$||'`/funclib.sh
-test extract-trace = "$progname" && . `echo "$0" |${SED-sed} 's|[^/]*$||'`/options-parser
+test -z "$progpath" && . "`echo "$0" |${SED-sed} 's|[^/]*$||'`funclib.sh"
+test extract-trace = "$progname" && . "`echo "$0" |${SED-sed} 's|[^/]*$||'`options-parser"
 
 # Set a version string.
-scriptversion=2016-02-22.14; # UTC
+scriptversion=2016-08-15.19; # UTC
 
 
 ## ------ ##
@@ -167,7 +167,7 @@ func_find_tool ()
 	  IFS=$_G_find_tool_save_IFS
 	  _G_progpath=$_G_dir/$_G_prog
           test -r "$_G_progpath" && {
-            _G_curver=`func_tool_version_number $_G_progpath`
+            _G_curver=`func_tool_version_number "$_G_progpath"`
 	    case $_G_bestver,$_G_curver in
 	    ,)
 	      # first non--version responsive prog sticks!
@@ -481,6 +481,6 @@ test extract-trace = "$progname" && func_main "$@"
 # mode: shell-script
 # sh-indentation: 2
 # eval: (add-hook 'before-save-hook 'time-stamp)
-# time-stamp-pattern: "20/scriptversion=%:y-%02m-%02d.%02H; # UTC"
+# time-stamp-pattern: "30/scriptversion=%:y-%02m-%02d.%02H; # UTC"
 # time-stamp-time-zone: "UTC"
 # End:

@@ -1,6 +1,6 @@
 #! /bin/sh
 ## DO NOT EDIT - This file generated from build-aux/bootstrap.in
-##               by inline-source v2016-02-21.11
+##               by inline-source v2016-08-16.15
 
 # Bootstrap an Autotooled package from checked-out sources.
 # Written by Gary V. Vaughan, 2010
@@ -224,7 +224,7 @@ vc_ignore=
 
 # Source required external libraries:
 # Set a version string for this script.
-scriptversion=2016-02-28.16; # UTC
+scriptversion=2016-08-15.14; # UTC
 
 # General shell script boiler plate, and helper functions.
 # Written by Gary V. Vaughan, 2004
@@ -370,7 +370,7 @@ func_path_progs ()
           func_executable_p "$_G_path_prog" || continue
           case `"$_G_path_prog" --version 2>&1` in
             *GNU*) func_path_progs_result=$_G_path_prog _G_path_prog_found=: ;;
-            *)     $_G_check_func $_G_path_prog
+            *)     $_G_check_func "$_G_path_prog"
 		   func_path_progs_result=$func_check_prog_result
 		   ;;
           esac
@@ -2355,11 +2355,11 @@ func_version ()
 # <https://github.com/gnulib-modules/bootstrap/issues>
 
 # Make sure we've evaluated scripts we depend on.
-test -z "$progpath" && . `echo "$0" |${SED-sed} 's|[^/]*$||'`/funclib.sh
-test extract-trace = "$progname" && . `echo "$0" |${SED-sed} 's|[^/]*$||'`/options-parser
+test -z "$progpath" && . "`echo "$0" |${SED-sed} 's|[^/]*$||'`funclib.sh"
+test extract-trace = "$progname" && . "`echo "$0" |${SED-sed} 's|[^/]*$||'`options-parser"
 
 # Set a version string.
-scriptversion=2016-02-22.14; # UTC
+scriptversion=2016-08-15.19; # UTC
 
 
 ## ------ ##
@@ -2503,7 +2503,7 @@ func_find_tool ()
 	  IFS=$_G_find_tool_save_IFS
 	  _G_progpath=$_G_dir/$_G_prog
           test -r "$_G_progpath" && {
-            _G_curver=`func_tool_version_number $_G_progpath`
+            _G_curver=`func_tool_version_number "$_G_progpath"`
 	    case $_G_bestver,$_G_curver in
 	    ,)
 	      # first non--version responsive prog sticks!
@@ -2817,12 +2817,12 @@ test extract-trace = "$progname" && func_main "$@"
 # mode: shell-script
 # sh-indentation: 2
 # eval: (add-hook 'before-save-hook 'time-stamp)
-# time-stamp-pattern: "20/scriptversion=%:y-%02m-%02d.%02H; # UTC"
+# time-stamp-pattern: "30/scriptversion=%:y-%02m-%02d.%02H; # UTC"
 # time-stamp-time-zone: "UTC"
 # End:
 
 # Set a version string for *this* script.
-scriptversion=2016-02-28.16; # UTC
+scriptversion=2016-08-15.19; # UTC
 
 
 ## ------------------- ##

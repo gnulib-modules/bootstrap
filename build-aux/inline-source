@@ -19,11 +19,11 @@
 # <https://github.com/gnulib-modules/bootstrap/issues>
 
 # Source required external libraries:
-. `echo "$0" |${SED-sed} 's|[^/]*$||'`"funclib.sh"
-. `echo "$0" |${SED-sed} 's|[^/]*$||'`"options-parser"
+. "`echo "$0" |${SED-sed} 's|[^/]*$||'`funclib.sh"
+. "`echo "$0" |${SED-sed} 's|[^/]*$||'`options-parser"
 
 # Set a version string for *this* script.
-scriptversion=2016-02-21.11; # UTC
+scriptversion=2016-08-16.15; # UTC
 
 
 ## ------ ##
@@ -34,9 +34,10 @@ scriptversion=2016-02-21.11; # UTC
 # from the command line.
 
 # Recursively scan through a FILE passed on the command line, replacing
-# either of the following:
+# any of the following:
 #   . "relative/file"
 #   . `echo "$0" |edit`"relative/file"
+#   . "`echo "$0" |edit`relative/file"
 # with the contents of the referenced files.
 
 
@@ -118,27 +119,38 @@ func_include ()
     _G_scriptdir=`echo "$1" |$SED 's|[^/]*$||'`
     test -n "$_G_scriptdir" || _G_scriptdir="./"
 
+    # quote progpath for use in AWK script
+    func_quote_arg unquoted "$progpath"
+    _G_qprogpath=$func_quote_arg_unquoted_result
+
     $AWK '
-        BEGIN { magic = '${_RECURSE_MAGIC-0}'; }
+        BEGIN { magic = '"${_RECURSE_MAGIC-0}"'; }
 
         /^#!/ && magic == 0 {
             print $0;
-            print "## DO NOT EDIT - This file generated from '$1'";
-            print "##               by '$progname' v'$scriptversion'";
+            print "## DO NOT EDIT - This file generated from '"$1"'";
+            print "##               by '"$progname"' v'"$scriptversion"'";
             magic++;
+            next;
+        }
+
+        /^\. "`echo [^`]*`[^"]*"$/ {
+            tail = substr ($0, match ($0, /[^"]`/) +2);
+	    file = substr (tail, 1, length (tail) -1);
+	    system (sprintf ("env _RECURSE_MAGIC=%d '\'"$_G_qprogpath"\'' '\'"$_G_scriptdir"'%s'\''", magic, file));
             next;
         }
 
         /^\. ['\''"].*['\''"]$/ {
             file = substr ($2, 2, length ($2) -2);
-	    system (sprintf ("env _RECURSE_MAGIC=%d '$progpath' %s", magic, file));
+	    system (sprintf ("env _RECURSE_MAGIC=%d '\'"$_G_qprogpath"\'' %s", magic, file));
             next;
         }
 
         /^\. `echo [^`]*`['\''"][^'\''"]*['\''"]$/ {
             tail = substr ($0, match ($0, /`['\''"]/));
 	    file = substr (tail, 3, length (tail) -3);
-	    system (sprintf ("env _RECURSE_MAGIC=%d '$progpath' '"$_G_scriptdir"'%s", magic, file));
+	    system (sprintf ("env _RECURSE_MAGIC=%d '\'"$_G_qprogpath"\'' '\'"$_G_scriptdir"'%s'\''", magic, file));
             next;
         }
 
@@ -154,6 +166,6 @@ exit 0
 # mode: shell-script
 # sh-indentation: 2
 # eval: (add-hook 'before-save-hook 'time-stamp)
-# time-stamp-pattern: "20/scriptversion=%:y-%02m-%02d.%02H; # UTC"
+# time-stamp-pattern: "30/scriptversion=%:y-%02m-%02d.%02H; # UTC"
 # time-stamp-time-zone: "UTC"
 # End:
