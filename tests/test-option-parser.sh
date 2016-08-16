@@ -22,7 +22,7 @@ all_shells_script=$0
 
 . "$abs_aux_dir"/options-parser || exit 1
 
-helper="$__GL_ALL_SHELLS_SHELL $abs_srcdir/test-option-parser-helper"
+helper="$abs_srcdir/test-option-parser-helper"
 
 check_output_inner ()
 {
@@ -32,7 +32,7 @@ check_output_inner ()
     func_quote pretty ${1+"$@"}
     $ECHO "[[ output check ]] args: $func_quote_result"
 
-    output=`$helper ${1+"$@"} 2>/dev/null`
+    output=`$__GL_ALL_SHELLS_SHELL "$helper" ${1+"$@"} 2>/dev/null`
     rc=$?
     test "$rc" -eq "$exp_retval" \
         || all_shells_error "unexpected exit status $rc $exp_retval"
@@ -64,7 +64,7 @@ check_retval ()
     exp_retval=$1 ; shift
     func_quote pretty ${1+"$@"}
     $ECHO "[[ retval check ]] args: $func_quote_result"
-    $helper ${1+"$@"} >/dev/null 2>/dev/null
+    $__GL_ALL_SHELLS_SHELL "$helper" ${1+"$@"} >/dev/null 2>/dev/null
     rc=$?
     test "$rc" -eq "$exp_retval" \
         || all_shells_error "unexpected retval $rc (should be $exp_retval)"
@@ -79,7 +79,7 @@ grep_output ()
     func_quote pretty ${1+"$@"}
     $ECHO "[[ grep for '$grep_for' ]] args: $func_quote_result"
 
-    output=`$helper ${1+"$@"} 2>/dev/null`
+    output=`$__GL_ALL_SHELLS_SHELL "$helper" ${1+"$@"} 2>/dev/null`
     rc=$?
     case $output in
       *$grep_for*) : ;;

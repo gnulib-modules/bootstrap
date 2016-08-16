@@ -221,12 +221,12 @@ vc_ignore=
 ## ------------------- ##
 
 # Source required external libraries:
-. `echo "$0" |${SED-sed} 's|[^/]*$||'`"funclib.sh"
-. `echo "$0" |${SED-sed} 's|[^/]*$||'`"options-parser"
-. `echo "$0" |${SED-sed} 's|[^/]*$||'`"extract-trace"
+. "`echo "$0" |${SED-sed} 's|[^/]*$||'`funclib.sh"
+. "`echo "$0" |${SED-sed} 's|[^/]*$||'`options-parser"
+. "`echo "$0" |${SED-sed} 's|[^/]*$||'`extract-trace"
 
 # Set a version string for *this* script.
-scriptversion=2016-02-28.16; # UTC
+scriptversion=2016-08-15.19; # UTC
 
 
 ## ------------------- ##

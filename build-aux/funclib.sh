@@ -1,5 +1,5 @@
 # Set a version string for this script.
-scriptversion=2016-02-28.16; # UTC
+scriptversion=2016-08-15.14; # UTC
 
 # General shell script boiler plate, and helper functions.
 # Written by Gary V. Vaughan, 2004
@@ -145,7 +145,7 @@ func_path_progs ()
           func_executable_p "$_G_path_prog" || continue
           case `"$_G_path_prog" --version 2>&1` in
             *GNU*) func_path_progs_result=$_G_path_prog _G_path_prog_found=: ;;
-            *)     $_G_check_func $_G_path_prog
+            *)     $_G_check_func "$_G_path_prog"
 		   func_path_progs_result=$func_check_prog_result
 		   ;;
           esac
