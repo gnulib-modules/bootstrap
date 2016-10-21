@@ -18,12 +18,14 @@
 # Please report bugs or propose patches to:
 # <https://github.com/gnulib-modules/bootstrap/issues>
 
+inline_source_dir=`echo "$0" |${SED-sed} 's|[^/]*$||'`
+
 # Source required external libraries:
-. `echo "$0" |${SED-sed} 's|[^/]*$||'`"funclib.sh"
-. `echo "$0" |${SED-sed} 's|[^/]*$||'`"options-parser"
+. "$inline_source_dir"funclib.sh
+. "$inline_source_dir"options-parser
 
 # Set a version string for *this* script.
-scriptversion=2016-02-21.11; # UTC
+scriptversion=2016-10-21.11; # UTC
 
 
 ## ------ ##
@@ -35,9 +37,14 @@ scriptversion=2016-02-21.11; # UTC
 
 # Recursively scan through a FILE passed on the command line, replacing
 # either of the following:
-#   . "relative/file"
-#   . `echo "$0" |edit`"relative/file"
-# with the contents of the referenced files.
+#
+#   a) . "relative/file"
+#   b) . `echo "$0" |edit`"relative/file"
+#   c) . "$inline_source_dir"/relative/file
+#
+# with the contents of the referenced files.  When the c) option is used,
+# '$inline_source_dir' must be explicitly set to script's source directory
+# within the source file.  See the example few lines above.
 
 
 ## ---------------- ##
@@ -118,6 +125,11 @@ func_include ()
     _G_scriptdir=`echo "$1" |$SED 's|[^/]*$||'`
     test -n "$_G_scriptdir" || _G_scriptdir="./"
 
+    func_quote_arg unquoted "$progpath"
+    prog=$func_quote_arg_unquoted_result
+
+    export inline_source_dir=$_G_scriptdir
+
     $AWK '
         BEGIN { magic = '${_RECURSE_MAGIC-0}'; }
 
@@ -129,16 +141,25 @@ func_include ()
             next;
         }
 
+        /^inline_source_dir=.*/ {
+            next;
+        }
+
+        /^\. "\$inline_source_dir.*/ {
+            system (sprintf ("env _RECURSE_MAGIC=%d \"'"$prog"'\" %s", magic, $2));
+            next;
+        }
+
         /^\. ['\''"].*['\''"]$/ {
             file = substr ($2, 2, length ($2) -2);
-	    system (sprintf ("env _RECURSE_MAGIC=%d '$progpath' %s", magic, file));
+            system (sprintf ("env _RECURSE_MAGIC=%d \"'"$prog"'\" %s", magic, file));
             next;
         }
 
         /^\. `echo [^`]*`['\''"][^'\''"]*['\''"]$/ {
             tail = substr ($0, match ($0, /`['\''"]/));
-	    file = substr (tail, 3, length (tail) -3);
-	    system (sprintf ("env _RECURSE_MAGIC=%d '$progpath' '"$_G_scriptdir"'%s", magic, file));
+            file = substr (tail, 3, length (tail) -3);
+            system (sprintf ("env _RECURSE_MAGIC=%d \"'"$prog"'\" '"$_G_scriptdir"'%s", magic, file));
             next;
         }
 

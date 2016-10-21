@@ -1,6 +1,6 @@
 #! /bin/sh
 ## DO NOT EDIT - This file generated from build-aux/bootstrap.in
-##               by inline-source v2016-02-21.11
+##               by inline-source v2016-10-21.11
 
 # Bootstrap an Autotooled package from checked-out sources.
 # Written by Gary V. Vaughan, 2010
@@ -221,6 +221,7 @@ vc_ignore=
 ## ------------------- ##
 ## External Libraries. ##
 ## ------------------- ##
+
 
 # Source required external libraries:
 # Set a version string for this script.
@@ -2822,7 +2823,7 @@ test extract-trace = "$progname" && func_main "$@"
 # End:
 
 # Set a version string for *this* script.
-scriptversion=2016-02-28.16; # UTC
+scriptversion=2016-10-21.11; # UTC
 
 
 ## ------------------- ##
