@@ -220,13 +220,15 @@ vc_ignore=
 ## External Libraries. ##
 ## ------------------- ##
 
+inline_source_dir=`echo "$0" |${SED-sed} 's|[^/]*$||'`
+
 # Source required external libraries:
-. `echo "$0" |${SED-sed} 's|[^/]*$||'`"funclib.sh"
-. `echo "$0" |${SED-sed} 's|[^/]*$||'`"options-parser"
-. `echo "$0" |${SED-sed} 's|[^/]*$||'`"extract-trace"
+. "$inline_source_dir"funclib.sh
+. "$inline_source_dir"options-parser
+. "$inline_source_dir"extract-trace
 
 # Set a version string for *this* script.
-scriptversion=2016-02-28.16; # UTC
+scriptversion=2016-10-21.11; # UTC
 
 
 ## ------------------- ##
