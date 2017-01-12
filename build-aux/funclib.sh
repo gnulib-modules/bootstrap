@@ -7,7 +7,7 @@ scriptversion=2016-02-28.16; # UTC
 # This is free software.  There is NO warranty; not even for
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 #
-# Copyright (C) 2004-2016 Bootstrap Authors
+# Copyright (C) 2004-2017 Bootstrap Authors
 #
 # This file is dual licensed under the terms of the MIT license
 # <https://opensource.org/license/MIT>, and GPL version 2 or later
