@@ -226,7 +226,7 @@ vc_ignore=
 . `echo "$0" |${SED-sed} 's|[^/]*$||'`"extract-trace"
 
 # Set a version string for *this* script.
-scriptversion=2016-02-28.16; # UTC
+scriptversion=2017-01-09.18; # UTC
 
 
 ## ------------------- ##
@@ -538,6 +538,7 @@ func_gettext_configuration ()
              '"$_G_xgettext_options"' \\\
              $${end_of_xgettext_options+}
         }
+        s/ *$//
       ' po/Makevars.template >po/Makevars || exit 1
     }
 
