@@ -202,7 +202,7 @@ test -z "$SED" && {
     rm -f conftest.in conftest.tmp conftest.nl conftest.out
   }
 
-  func_path_progs "sed gsed" func_check_prog_sed $PATH:/usr/xpg4/bin
+  func_path_progs "sed gsed" func_check_prog_sed "$PATH:/usr/xpg4/bin"
   rm -f conftest.sed
   SED=$func_path_progs_result
 }
@@ -238,7 +238,7 @@ test -z "$GREP" && {
     rm -f conftest.in conftest.tmp conftest.nl conftest.out
   }
 
-  func_path_progs "grep ggrep" func_check_prog_grep $PATH:/usr/xpg4/bin
+  func_path_progs "grep ggrep" func_check_prog_grep "$PATH:/usr/xpg4/bin"
   GREP=$func_path_progs_result
 }
 
