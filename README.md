@@ -66,7 +66,7 @@ There are two ways to incorporate this bootstrap into your own projects:
      `local_gl_path=gl-local:gl-mod/bootstrap.
 
    * (Only) if you added this `bootstrap` repository as a git submodule, you
-     want to let it automatically initialized during the first `./bootstrap`
+     want to let it be automatically initialized during the first `./bootstrap`
      invocation.  To achieve this, use `gnulib_git_submodules=gl-mod/bootstrap`
      option.
 
