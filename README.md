@@ -47,9 +47,11 @@ There are two ways to incorporate this bootstrap into your own projects:
 
 1. If your project already uses [GNU Gnulib], then you can copy this
    entire repository into your project, let's say under
-   `gl-mod/bootstrap` directory.  If you are using `git` version control
+   `gl-mod/bootstrap` directory.  If you are using the `git` version control
    system, you are encouraged to add this source repository as a
-   [git submodule][] instead of copying it.
+   [git submodule][] instead of copying it:
+
+   `git submodule add -- https://github.com/gnulib-modules/bootstrap.git gl-mod/bootstrap`
 
    This configuration options should be added into your project's
    `bootstrap.conf` file:
