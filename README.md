@@ -77,6 +77,7 @@ There are two ways to incorporate this bootstrap into your own projects:
       ```
       aux_src=gl-mod/bootstrap/build-aux
       $aux_src/inline-source $aux_src/bootstrap.in > bootstrap
+      chmod +x bootstrap
       ```
 
    The resulting script will then keep track of changes to the
