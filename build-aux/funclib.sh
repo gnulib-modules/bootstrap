@@ -1,5 +1,5 @@
 # Set a version string for this script.
-scriptversion=2017-04-19.12; # UTC
+scriptversion=2018-07-24.06; # UTC
 
 # General shell script boiler plate, and helper functions.
 # Written by Gary V. Vaughan, 2004
@@ -7,7 +7,7 @@ scriptversion=2017-04-19.12; # UTC
 # This is free software.  There is NO warranty; not even for
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 #
-# Copyright (C) 2004-2017 Bootstrap Authors
+# Copyright (C) 2004-2018 Bootstrap Authors
 #
 # This file is dual licensed under the terms of the MIT license
 # <https://opensource.org/license/MIT>, and GPL version 2 or later
