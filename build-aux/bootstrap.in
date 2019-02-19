@@ -7,7 +7,7 @@
 # This is free software.  There is NO warranty; not even for
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 #
-# Copyright (C) 2010-2018 Bootstrap Authors
+# Copyright (C) 2010-2019 Bootstrap Authors
 #
 # This file is dual licensed under the terms of the MIT license
 # <https://opensource.org/license/MIT>, and GPL version 2 or later
@@ -226,7 +226,7 @@ vc_ignore=
 . `echo "$0" |${SED-sed} 's|[^/]*$||'`"extract-trace"
 
 # Set a version string for *this* script.
-scriptversion=2018-07-24.06; # UTC
+scriptversion=2019-02-19.15; # UTC
 
 
 ## ------------------- ##
