@@ -158,6 +158,9 @@ gnulib_non_module_files="
 gnulib_path=
 gnulib_url=
 
+# Date from which to clone github, to avoid a full clone.
+gnulib_clone_since=
+
 # Additional gnulib-tool options to use.
 gnulib_tool_options="
         --no-changelog
@@ -226,7 +229,7 @@ vc_ignore=
 . `echo "$0" |${SED-sed} 's|[^/]*$||'`"extract-trace"
 
 # Set a version string for *this* script.
-scriptversion=2019-02-19.15; # UTC
+scriptversion=2019-03-22.11; # UTC
 
 
 ## ------------------- ##
@@ -1621,8 +1624,9 @@ func_require_gnulib_submodule ()
         trap func_cleanup_gnulib 1 2 13 15
 
         shallow=
-        $GIT clone -h 2>&1 |func_grep_q -- --depth \
-            && shallow='--depth 365'
+        test -n "$gnulib_clone_since" && \
+            $GIT clone -h 2>&1 |func_grep_q -- --shallow-since \
+            && shallow="--shallow-since=$gnulib_clone_since"
 
         func_show_eval "$GIT clone $shallow '$gnulib_url' '$gnulib_path'" \
           func_cleanup_gnulib
