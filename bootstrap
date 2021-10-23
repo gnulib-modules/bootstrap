@@ -2245,7 +2245,7 @@ else
   {
       $debug_cmd
 
-      func_split_short_opt_name=`expr "x$1" : 'x-\(.\)'`
+      func_split_short_opt_name=`expr "x$1" : 'x\(-.\)'`
       func_split_short_opt_arg=`expr "x$1" : 'x-.\(.*\)$'`
   }
 fi #func_split_short_opt
