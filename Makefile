@@ -4,7 +4,7 @@
 ## This is free software.  There is NO warranty; not even for
 ## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ##
-## Copyright (C) 2014-2019 Bootstrap Authors
+## Copyright (C) 2014-2019, 2021 Bootstrap Authors
 ##
 ## This file is dual licensed under the terms of the MIT license
 ## <https://opensource.org/license/MIT>, and GPL version 2 or later
@@ -51,3 +51,12 @@ check:
 	  abs_aux_dir='$(abs_aux_dir)' abs_srcdir='$(abs_srcdir)'	\
 	  $(SHELL) tests/$$t;						\
 	done
+
+# Bump the copyright dates, and re-generate the bootstrap script by running make.
+update-copyright:
+	git grep -l Copyright | \
+	UPDATE_COPYRIGHT_HOLDER="Bootstrap Authors" \
+	UPDATE_COPYRIGHT_FORCE=1 \
+	UPDATE_COPYRIGHT_USE_INTERVALS=1 \
+	xargs $(UPDATE_COPYRIGHT_SCRIPT)
+	make
