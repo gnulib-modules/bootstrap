@@ -46,11 +46,13 @@ TESTS =					\
 	$(NOTHING_ELSE)
 
 check:
-	@for t in $(TESTS); do						\
-	  echo "tests/$$t:";						\
+	@result=: ; \
+	for t in $(TESTS); do						\
+	  echo "Running 'tests/$$t:'";					\
 	  abs_aux_dir='$(abs_aux_dir)' abs_srcdir='$(abs_srcdir)'	\
-	  $(SHELL) tests/$$t;						\
-	done
+	  $(SHELL) tests/$$t || result=false;				\
+	done ; \
+	$$result
 
 # Bump the copyright dates, and re-generate the bootstrap script by running make.
 update-copyright:
