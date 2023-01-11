@@ -8,7 +8,7 @@
 # Copyright (C) 2015-2019, 2021 Bootstrap Authors
 #
 # This file is dual licensed under the terms of the MIT license
-# <https://opensource.org/license/MIT>, and GPL version 2 or later
+# <https://opensource.org/licenses/MIT>, and GPL version 2 or later
 # <http://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
 # these licenses when using or redistributing this software or any of
 # the files within it.  See the URLs above, or the file `LICENSE`
