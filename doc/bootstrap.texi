@@ -75,7 +75,7 @@ help users locate missing packages)
 @smallexample
 buildreq='
         git        1.5.5   http://git-scm.com
-        help2man   1.29    http://www.gnu.org/s/help2man
+        help2man   1.29    https://www.gnu.org/s/help2man
 '
 @end smallexample
 
