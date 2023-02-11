@@ -13,7 +13,7 @@
 #
 # This file is dual licensed under the terms of the MIT license
 # <https://opensource.org/licenses/MIT>, and GPL version 2 or later
-# <http://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
+# <https://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
 # these licenses when using or redistributing this software or any of
 # the files within it.  See the URLs above, or the file `LICENSE`
 # included in the Bootstrap distribution for the full license texts.
@@ -239,7 +239,7 @@ scriptversion=2019-02-19.15; # UTC
 #
 # This file is dual licensed under the terms of the MIT license
 # <https://opensource.org/licenses/MIT>, and GPL version 2 or later
-# <http://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
+# <https://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
 # these licenses when using or redistributing this software or any of
 # the files within it.  See the URLs above, or the file `LICENSE`
 # included in the Bootstrap distribution for the full license texts.
@@ -1703,7 +1703,7 @@ func_lt_ver ()
 #
 # This file is dual licensed under the terms of the MIT license
 # <https://opensource.org/licenses/MIT>, and GPL version 2 or later
-# <http://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
+# <https://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
 # these licenses when using or redistributing this software or any of
 # the files within it.  See the URLs above, or the file `LICENSE`
 # included in the Bootstrap distribution for the full license texts.
@@ -2388,7 +2388,7 @@ func_version ()
 #
 # This file is dual licensed under the terms of the MIT license
 # <https://opensource.org/licenses/MIT>, and GPL version 2 or later
-# <http://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
+# <https://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
 # these licenses when using or redistributing this software or any of
 # the files within it.  See the URLs above, or the file `LICENSE`
 # included in the Bootstrap distribution for the full license texts.
@@ -3832,7 +3832,7 @@ for tool in autoconf libtoolize autopoint; do
       _G_version=$func_extract_trace_result
       test -n "$_G_version" && {
         func_append buildreq "\
-            '$tool' $_G_version http://www.gnu.org/s/'$b'
+            '$tool' $_G_version https://www.gnu.org/s/'$b'
 "
         func_verbose \
             "auto-adding '\'$tool'-$_G_version'\'' to build requirements"
@@ -3865,7 +3865,7 @@ func_require_buildreq_automake ()
         test -n "$automake_version" || automake_version=-
 
         func_append buildreq "\
-            automake $automake_version http://www.gnu.org/s/automake
+            automake $automake_version https://www.gnu.org/s/automake
 "
         func_verbose \
             "auto-adding 'automake-$automake_version' to build requirements"
@@ -3902,7 +3902,7 @@ func_require_buildreq_patch ()
         if test ! -d "$_G_dir" \
             || find "$_G_dir" -name "*.diff" -exec false {} \; ; then :
         else
-          func_append buildreq "patch - http://www.gnu.org/s/patch$nl"
+          func_append buildreq "patch - https://www.gnu.org/s/patch$nl"
           break
         fi
       done

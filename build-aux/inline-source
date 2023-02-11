@@ -10,7 +10,7 @@
 #
 # This file is dual licensed under the terms of the MIT license
 # <https://opensource.org/licenses/MIT>, and GPL version 2 or later
-# <http://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
+# <https://www.gnu.org/licenses/gpl-2.0.html>.  You must apply one of
 # these licenses when using or redistributing this software or any of
 # the files within it.  See the URLs above, or the file `LICENSE`
 # included in the Bootstrap distribution for the full license texts.
@@ -55,7 +55,7 @@ usage_message='Options:
 
 long_help_message="\
 Report bugs to <bug-libtool@gnu.org>
-General help using GNU software: <http://www.gnu.org/gethelp/>."
+General help using GNU software: <https://www.gnu.org/gethelp/>."
 
 func_options ${1+"$@"}
 eval set dummy "$func_options_result"; shift
