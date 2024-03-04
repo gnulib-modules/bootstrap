@@ -48,7 +48,7 @@
 #   gl/build-aux/inline-source gl/build-aux/bootstrap.in > bootstrap
 #
 # You should then store than script in version control for other
-# developers in you project.  It will give you instructions about
+# developers in your project.  It will give you instructions about
 # how to keep it up to date if the sources change.
 #
 # See gl/doc/bootstrap.texi for documentation on how to write
@@ -5164,7 +5164,7 @@ delimited list of triples; 'program min-version url'."
       esac
 
       # Honor $APP variables ($TAR, $AUTOCONF, etc.)
-      _G_appvar=`echo $_G_app |tr '[a-z]' '[A-Z]'`
+      _G_appvar=`echo $_G_app |tr '[a-z-]' '[A-Z_]'`
       test TAR = "$_G_appvar" && _G_appvar=AMTAR
       eval "_G_app=\${$_G_appvar-$_G_app}"
 

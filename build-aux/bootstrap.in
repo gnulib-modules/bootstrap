@@ -2529,7 +2529,7 @@ delimited list of triples; 'program min-version url'."
       esac
 
       # Honor $APP variables ($TAR, $AUTOCONF, etc.)
-      _G_appvar=`echo $_G_app |tr '[a-z]' '[A-Z]'`
+      _G_appvar=`echo $_G_app |tr '[a-z-]' '[A-Z_]'`
       test TAR = "$_G_appvar" && _G_appvar=AMTAR
       eval "_G_app=\${$_G_appvar-$_G_app}"
 
