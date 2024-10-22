@@ -51,7 +51,7 @@
 #
 # See gl/doc/bootstrap.texi for documentation on how to write
 # a bootstrap.conf to customize it for your project's
-# idiosyncracies.
+# idiosyncrasies.
 
 
 ## ================================================================== ##
@@ -190,7 +190,7 @@ extra_locale_categories=
 
 # Additional xgettext options to use.  Gnulib might provide you with an
 # extensive list of additional options to append to this, but gettext
-# 0.16.1 and newer appends them automaticaly, so you can safely ignore
+# 0.16.1 and newer appends them automatically, so you can safely ignore
 # the complaints from 'gnulib-tool' if your $configure_ac states:
 #
 #    AM_GNU_GETTEXT_VERSION([0.16.1])
@@ -2447,7 +2447,7 @@ func_get_version ()
     _G_app=$1
 
     # Rather than uncomment the sed script in-situ, strip the comments
-    # programatically before passing the result to $SED for evaluation.
+    # programmatically before passing the result to $SED for evaluation.
     sed_get_version=`$ECHO '# extract version within line
           s|.*[v ]\{1,\}\([0-9]\{1,\}\.[.a-z0-9-]*\).*|\1|
           t done
