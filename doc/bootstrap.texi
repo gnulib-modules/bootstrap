@@ -24,7 +24,7 @@ other tasks required at bootstrap-time.  This version of
 @command{bootstrap} does not have any of those short-comings -- in
 addition to the basic bootstrapping facilities provided by Gnulib's
 implementation, this version can be changed and upgraded on the fly by
-overridding or appending to existing functions in @file{bootstrap.conf}.
+overriding or appending to existing functions in @file{bootstrap.conf}.
 
 
 @menu
@@ -275,7 +275,7 @@ only interesting to projects with NLS support.
 @item xgettext_options
 Additional @command{xgettext} options to use.  Gnulib might provide you
 with an extensive list of additional options to append to this, but
-gettext 0.16.1 and newer already appends those automaticaly, so you can
+gettext 0.16.1 and newer already appends those automatically, so you can
 safely ignore the complaints from @command{gnulib-tool} as long as your
 @file{configure.ac} declares @code{AM_GNU_GETTEXT_VERSION([0.16.1])}.
 
