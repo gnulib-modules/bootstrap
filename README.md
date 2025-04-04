@@ -53,14 +53,14 @@ There are two ways to incorporate this bootstrap into your own projects:
 
    `git submodule add -- https://github.com/gnulib-modules/bootstrap.git gl-mod/bootstrap`
 
-   This configuration options should be added into your project's
+   These configuration options should be added into your project's
    `bootstrap.conf` file:
 
-   * Specify `local_gl_path=gl-mod/bootstrap` option.  This causes that
-     `gnulib-tool` will be automatically called with
+   * Specify `local_gl_path=gl-mod/bootstrap` option.  This causes
+     `gnulib-tool` to automatically be called with the
      `--local-dir gl-mod/bootstrap` option.
 
-   * Add `bootstrap` to `gnulib_modules` option.
+   * Add `bootstrap` to the `gnulib_modules` option.
 
    * If your project already uses some other gnulib's local override
      directories, simply mention those directories in `local_gl_path` too (colon
